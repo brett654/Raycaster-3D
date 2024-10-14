@@ -414,7 +414,7 @@ void display() {
 }
 
 // Key state management
-bool keys[1024] = { false }; // Array to track key states
+bool keys[1024] = { false };
 float movementSpeed = 50.0f;
 float rotationSpeed = 2.0f;
 
@@ -533,33 +533,25 @@ int main() {
     // Enable V-Sync
     glfwSwapInterval(1); // Wait for vertical refresh to prevent tearing
 
-    // Load OpenGL function pointers
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         printf("Failed to initialize GLAD\n");
         return -1;
     }
 
-    // Initialize OpenGL settings
     init();
 
-    // Set the key callback function
     glfwSetKeyCallback(window, key_callback);
 
-    // Variables for timing
     float lastFrameTime = 0.0f;
 
-    // Main loop
     while (!glfwWindowShouldClose(window)) {
-        // Calculate delta time
         float currentFrameTime = glfwGetTime();
         float deltaTime = currentFrameTime - lastFrameTime;
         lastFrameTime = currentFrameTime;
 
-        // Update player position based on key states and delta time
         update_player_position(deltaTime);
 
-        // Render the scene
-        display(); // Call the display function to render your objects
+        display();
 
         // Swap front and back buffers (double buffering)
         glfwSwapBuffers(window); // Swap buffers to show the rendered frame
